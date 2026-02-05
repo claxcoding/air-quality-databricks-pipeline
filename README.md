@@ -59,7 +59,25 @@ sensor.community API
 
 ## Project Structure
 
-*To be completed: Add details about the directory and file organization of the project.*
+```text
+├── 00_run_pipeline.py          # Pipeline orchestration notebook
+├── 01_setup.sql                # Database and environment setup
+├── 02_bronze_ingest_live.py    # Bronze ingestion (raw JSON)
+├── 03_silver_cleaning.py       # Silver cleaning & validation
+├── 04_gold_analytics.py        # Gold aggregations & snapshots
+│
+├── src/
+│   └── utils/
+│       ├── __init__.py         # Utility package initializer
+│       ├── api.py              # API fetching logic
+│       ├── bronze.py           # Bronze preparation helpers
+│       └── schemas.py          # Shared schemas
+│
+├── dashboards/
+│   └── databricks_sql/         # Dashboard screenshots / exports
+│
+└── README.md
+```
 
 ---
 
@@ -112,16 +130,16 @@ The pipeline is designed to be run **end-to-end** or **step-by-step** inside Dat
 
 ---
 
-### 3. Run the Pipeline in Order
+### 3. Run the Full Pipeline (Recommended)
 
-Execute the following notebooks **in sequence**:
+The project includes a dedicated **pipeline runner notebook** that orchestrates all pipeline steps.
 
+#### Runner Notebook
 ```text
-01_setup.sql
-02_bronze_ingest_live.py
-03_silver_cleaning.py
-04_gold_analytics.py
+00_run_pipeline
 ```
+
+---
 
 ## Bronze Layer – Raw Ingestion
 

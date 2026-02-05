@@ -330,5 +330,3 @@ Planned enhancements for this project include:
 * **Automated Data Quality Monitoring:**  
   Integrate automated alerts and monitoring for data quality issues, enabling proactive detection of sensor anomalies and pipeline failures.
 
-If you have other ideas or feature requests, feel free to contribute or open an issue!
-

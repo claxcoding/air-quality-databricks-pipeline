@@ -336,7 +336,7 @@ All transformations and aggregations are derived works.
 
 This project is built and executed using the following technologies:
 
-- **Databricks** (Apache Spark–based analytics platform)
+- **Databricks Free Edition** (Apache Spark–based analytics platform)
 - **Apache Spark** (distributed data processing engine)
 - **Delta Lake** (ACID storage layer for big data)
 

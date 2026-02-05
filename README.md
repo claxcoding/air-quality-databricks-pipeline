@@ -63,6 +63,66 @@ sensor.community API
 
 ---
 
+## Requirements
+
+This project is designed to run on **Databricks** and uses **PySpark with Delta Lake**.
+
+### Platform
+* Databricks Workspace
+* Databricks SQL enabled (for dashboards)
+* Delta Lake support
+
+### Databricks Runtime
+* **Databricks Runtime 13.x+** (recommended)
+  * Apache Spark 3.x
+  * Delta Lake preinstalled
+
+### Python Dependencies
+The following Python libraries are required and available by default on Databricks:
+
+* `pyspark`
+* `requests`
+* `json`
+* `uuid`
+* `datetime`
+
+No external package installation is required.
+
+### Data Access
+* Public API access to:
+  * `https://data.sensor.community/static/v2/data.json`
+* No authentication required
+
+---
+
+## How to Run the Project
+
+The pipeline is designed to be run **end-to-end** or **step-by-step** inside Databricks.
+
+### 1. Import the Repository
+* Clone or import this repository into **Databricks Repos**
+* Ensure the repository root is the working directory
+
+---
+
+### 2. Verify Runtime & Cluster
+* Attach notebooks to a Databricks cluster running:
+  * Databricks Runtime 13.x or newer
+* Ensure Delta Lake is enabled (default)
+
+---
+
+### 3. Run the Pipeline in Order
+
+Execute the following notebooks **in sequence**:
+
+```text
+01_setup.sql
+02_bronze_ingest_live.py
+03_silver_cleaning.py
+04_gold_analytics.py
+```
+
 ## Bronze Layer – Raw Ingestion
 
 **Notebook:** `02_bronze_ingest_live.py`

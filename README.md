@@ -315,3 +315,20 @@ This project is built and executed using the following technologies:
 
 All trademarks and registered trademarks are the property of their respective owners.
 
+---
+
+## Future Improvements
+
+Planned enhancements for this project include:
+
+* **Dashboard Screenshots:**  
+  Add visual examples of Databricks SQL dashboards to the documentation for easier onboarding and demonstration.
+
+* **Advanced Dashboard Analytics:**  
+  Implement more complex analytics in dashboards, such as time-series anomaly detection, sensor reliability scoring, and geospatial heatmaps.
+
+* **Automated Data Quality Monitoring:**  
+  Integrate automated alerts and monitoring for data quality issues, enabling proactive detection of sensor anomalies and pipeline failures.
+
+If you have other ideas or feature requests, feel free to contribute or open an issue!
+

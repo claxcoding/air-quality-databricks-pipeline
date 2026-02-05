@@ -16,33 +16,9 @@ The final outputs power both:
 
 ---
 
-## Architecture
+## Architecture Overview
 
-```text
-sensor.community API
-           │
-           ▼
-┌────────────────────────┐
-│ Bronze Layer           │
-│ Raw JSON ingestion     │
-│ Append-only Delta table│
-└──────────┬─────────────┘
-           ▼
-┌────────────────────────┐
-│ Silver Layer           │
-│ Schema enforcement     │
-│ Deduplication          │
-│ Data quality validation│
-│ Plausibility flags     │
-└──────────┬─────────────┘
-           ▼
-┌────────────────────────┐
-│ Gold Layer             │
-│ Daily aggregates       │
-│ Latest sensor snapshot │
-│ Dashboard-ready tables │
-└────────────────────────┘
-```
+![Air Quality Pipeline Architecture](docs/architecture.png)
 
 ---
 

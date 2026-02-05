@@ -117,16 +117,13 @@ The pipeline is designed to be run **end-to-end** or **step-by-step** inside Dat
 
 The project includes a dedicated **pipeline runner notebook** that orchestrates all pipeline steps.
 
-#### Runner Notebook
-```text
-00_run_pipeline
-```
+**Notebook:** `00_run_pipeline`
 
 ---
 
 ## Bronze Layer – Raw Ingestion
 
-**Notebook:** `02_bronze_ingest_live.py`
+**Notebook:** `02_bronze_ingest_live`
 
 ### Responsibilities
 * Fetch live sensor data from the API
@@ -146,7 +143,7 @@ The project includes a dedicated **pipeline runner notebook** that orchestrates 
 
 ## Silver Layer – Cleaning & Validation
 
-**Notebook:** `03_silver_cleaning.py`
+**Notebook:** `03_silver_cleaning`
 
 ### Responsibilities
 * Parse raw JSON into structured schema
@@ -182,7 +179,7 @@ quality_reason → NEGATIVE_VALUE | PM_RATIO_VIOLATION | OUT_OF_RANGE | OK
 
 ## Gold Layer – Analytics & Aggregation
 
-**Notebook:** `04_gold_analytics.py`
+**Notebook:** `04_gold_analytics`
 
 The Gold layer provides **analytics-ready datasets** derived from validated Silver measurements.  
 Only **physically plausible measurements** (`quality_flag = 'OK'`) are consumed.

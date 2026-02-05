@@ -331,3 +331,14 @@ This project consumes public air-quality data provided by **sensor.community**.
 
 The data is used in compliance with the license terms.
 All transformations and aggregations are derived works.
+
+## Acknowledgements
+
+This project is built and executed using the following technologies:
+
+- **Databricks** (Apache Spark–based analytics platform)
+- **Apache Spark** (distributed data processing engine)
+- **Delta Lake** (ACID storage layer for big data)
+
+All trademarks and registered trademarks are the property of their respective owners.
+

@@ -117,7 +117,7 @@ The pipeline is designed to be run **end-to-end** or **step-by-step** inside Dat
 
 The project includes a dedicated **pipeline runner notebook** that orchestrates all pipeline steps.
 
-**Notebook:** `00_run_pipeline`
+**Runner Notebook:** `00_run_pipeline`
 
 ---
 

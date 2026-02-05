@@ -315,3 +315,19 @@ To ensure utilities are available during pipeline execution, notebooks include:
 import sys, os
 sys.path.append(os.path.abspath(".."))
 ```
+
+---
+
+## Data License & Attribution
+
+This project consumes public air-quality data provided by **sensor.community**.
+
+**Data source:**
+- sensor.community
+- https://sensor.community
+
+**License:**
+- Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+The data is used in compliance with the license terms.
+All transformations and aggregations are derived works.

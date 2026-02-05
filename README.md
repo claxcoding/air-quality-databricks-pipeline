@@ -131,7 +131,7 @@ The project includes a dedicated **pipeline runner notebook** that orchestrates 
 * Append-only ingestion (ELT pattern)
 
 ### Bronze Table
-`air_quality_bronze.live_sensor_raw`
+**Table:** `air_quality_bronze.live_sensor_raw`
 
 ### Key Design Choices
 * Raw JSON preserved for traceability
@@ -153,7 +153,7 @@ The project includes a dedicated **pipeline runner notebook** that orchestrates 
 * Preserve invalid data with quality flags
 
 ### Silver Table
-`air_quality_silver.sensor_measurements`
+**Table:** `air_quality_silver.sensor_measurements`
 
 ### Transformations & Rules
 

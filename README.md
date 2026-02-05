@@ -60,21 +60,28 @@ sensor.community API
 ## Project Structure
 
 ```text
-├── 00_run_pipeline.py          # Pipeline orchestration notebook
-├── 01_setup.sql                # Database and environment setup
-├── 02_bronze_ingest_live.py    # Bronze ingestion (raw JSON)
-├── 03_silver_cleaning.py       # Silver cleaning & validation
-├── 04_gold_analytics.py        # Gold aggregations & snapshots
+air-quality-databricks-pipeline
+├── docs
+│   ├── architecture.png
+│   ├── data-model.md
+│   └── project-overview.md
 │
-├── src/
-│   └── utils/
-│       ├── __init__.py         # Utility package initializer
-│       ├── api.py              # API fetching logic
-│       ├── bronze.py           # Bronze preparation helpers
-│       └── schemas.py          # Shared schemas
+├── notebooks
+│   ├── 00_run_pipeline             # Pipeline orchestration notebook
+│   ├── 01_platform_bootstrap       # Database and environment setup
+│   ├── 02_bronze_ingest_live       # Bronze ingestion (raw JSON)
+│   ├── 03_silver_cleaning          # Silver cleaning & validation
+│   ├── 04_gold_analytics           # Gold aggregations & snapshots
+│   └── 05_gold_quality_checks      # Gold-layer quality & sanity checks
 │
-├── dashboards/
-│   └── databricks_sql/         # Dashboard screenshots / exports
+├── src
+│   └── utils
+│       ├── __init__.py             # Utility package initializer
+│       ├── bronze.py               # Bronze preparation helpers
+│       └── http.py                 # API fetching logic
+│
+├── dashboards
+│   └── databricks_sql              # Dashboard screenshots / exports
 │
 └── README.md
 ```

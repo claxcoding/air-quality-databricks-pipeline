@@ -1,55 +1,232 @@
-README.md (Phase 1 version)
-Air Quality Data Pipeline on Databricks
+# 🌍 Real-Time Air Quality Data Pipeline (Databricks • Delta Lake • PySpark)
 
-This project is an end-to-end data engineering pipeline built on Databricks Community Edition.
-It ingests, processes, and analyzes air-quality measurements from the Sensor.Community open environmental sensor network.
+## Overview
 
-The pipeline follows the Medallion Architecture:
+This project implements a **production-style data engineering pipeline** that ingests live air-quality sensor data, validates and cleans it through layered transformations, and exposes analytics-ready datasets for **Python analysis and dashboard visualization**.
 
-Bronze: Raw ingestion from API & monthly archives
+The pipeline follows a **Bronze → Silver → Gold** architecture using **Databricks, Delta Lake, and PySpark**, with a strong focus on:
+* Data quality and physical plausibility
+* Deterministic deduplication
+* Analytics-friendly modeling
+* Dashboard-ready aggregation
 
-Silver: Cleaning, normalization & deduplication
+The final outputs power both:
+* Python-based exploratory analysis
+* Databricks SQL dashboards for air-quality monitoring
 
-Gold: Aggregated analytics for dashboards
+---
 
-Technologies used:
+## Architecture
 
-Databricks (Community Edition)
+```text
+sensor.community API
+           │
+           ▼
+┌────────────────────────┐
+│ Bronze Layer           │
+│ Raw JSON ingestion     │
+│ Append-only Delta table│
+└──────────┬─────────────┘
+           ▼
+┌────────────────────────┐
+│ Silver Layer           │
+│ Schema enforcement     │
+│ Deduplication          │
+│ Data quality validation│
+│ Plausibility flags     │
+└──────────┬─────────────┘
+           ▼
+┌────────────────────────┐
+│ Gold Layer             │
+│ Daily aggregates       │
+│ Latest sensor snapshot │
+│ Dashboard-ready tables │
+└────────────────────────┘
+```
 
-Delta Lake
+---
 
-PySpark / Python 3.10+
+## Data Source
 
-Databricks Workflows (optional)
+* **sensor.community**
+* Public, community-driven air-quality sensor network
+* Live PM10 (P1) and PM2.5 (P2) measurements
 
-Type-hinted Python modules
+**API endpoint:**
+[https://data.sensor.community/static/v2/data.json](https://data.sensor.community/static/v2/data.json)
 
-Sensor.Community public API and CSV archives
+---
 
-The goal of this project is to showcase:
+## Project Structure
 
-Scalable ingestion
+*To be completed: Add details about the directory and file organization of the project.*
 
-Distributed data processing
+---
 
-Data modeling & quality checks
+## Bronze Layer – Raw Ingestion
 
-Documentation & engineering best practices
+**Notebook:** `02_bronze_ingest_live.py`
 
-Repository structure (Phase 1):
+### Responsibilities
+* Fetch live sensor data from the API
+* Store **unmodified JSON payloads**
+* Append-only ingestion (ELT pattern)
 
-air-quality-databricks-pipeline/
-│
-├── README.md
-├── docs/
-│   ├── architecture.png
-│   ├── data-model.md
-│   └── project-overview.md
-│
-├── src/
-│   └── utils.py
-│
-├── notebooks/
-│   └── 01_setup_environment.py
-│
-└── data/  (ignored)
+### Bronze Table
+`air_quality_bronze.live_sensor_raw`
+
+### Key Design Choices
+* Raw JSON preserved for traceability
+* Batch ID per ingestion run
+* UTC ingestion timestamps
+* No transformations or filtering
+
+---
+
+## Silver Layer – Cleaning & Validation
+
+**Notebook:** `03_silver_cleaning.py`
+
+### Responsibilities
+* Parse raw JSON into structured schema
+* Enforce data types
+* Deterministic deduplication
+* Physical plausibility validation
+* Preserve invalid data with quality flags
+
+### Silver Table
+`air_quality_silver.sensor_measurements`
+
+### Transformations & Rules
+
+#### Deduplication
+* One row per `(sensor_id, timestamp, measurement_type)`.
+* Keep **latest ingested record**.
+
+#### Data Quality & Plausibility
+
+| Rule                  | Description                                 |
+|-----------------------|---------------------------------------------|
+| Non-negative values   | PM values ≥ 0                               |
+| PM2.5 ≤ 1.2 × PM10    | Physical plausibility                       |
+| Maximum bounds        | PM10 ≤ 1000 µg/m³, PM2.5 ≤ 500 µg/m³        |
+
+#### Quality Metadata
+```text
+quality_flag   → OK / BAD
+quality_reason → NEGATIVE_VALUE | PM_RATIO_VIOLATION | OUT_OF_RANGE | OK
+```
+
+---
+
+## Gold Layer – Analytics & Aggregation
+
+**Notebook:** `04_gold_analytics.py`
+
+The Gold layer provides **analytics-ready datasets** derived from validated Silver measurements.  
+Only **physically plausible measurements** (`quality_flag = 'OK'`) are consumed.
+
+Gold tables are designed for:
+* Python-based analytics
+* Databricks SQL dashboards
+* KPI-style reporting
+
+---
+
+### Gold Table: Daily Air Quality
+
+**Table:** `air_quality_gold.daily_air_quality`
+
+**Grain:**  
+`(date, location_id)`
+
+### Purpose
+* Daily trend analysis
+* Location-level air-quality monitoring
+* Python analytics and sanity checks
+
+### Metrics
+* `pm10_avg` – Daily average PM10
+* `pm25_avg` – Daily average PM2.5
+* `pm10_count` – Number of PM10 measurements
+* `pm25_count` – Number of PM2.5 measurements
+* `sensors` – Distinct active sensors
+* `measurements` – Total valid PM records
+
+### Design Notes
+* Only `quality_flag = 'OK'` records are included
+* Days with no valid PM measurements are excluded
+* Latitude and longitude retained for geospatial use
+
+---
+
+### Gold Table: Latest Sensor Snapshot
+
+**Table:** `air_quality_gold.latest_sensor_snapshot`
+
+**Grain:**  
+`(sensor_id)`
+
+### Purpose
+* Dashboard KPIs
+* Country-level filtering
+* Real-time-ish air-quality overview
+
+### Metrics
+* Latest PM10 and PM2.5 values per sensor
+* Sensor metadata and location
+* Ingestion timestamp
+* Derived `date` column for time-based filtering
+
+### Design Notes
+* One row per sensor (latest measurement)
+* Uses window functions for deterministic snapshot selection
+* Optimized for Databricks SQL dashboards
+
+---
+
+## Dashboard & Visualization
+
+**Platform:** Databricks SQL Dashboard
+
+The dashboard consumes **only Gold tables**, ensuring:
+* Clean, validated data
+* Fast query performance
+* Clear separation of concerns
+
+### Current Dashboard Components
+* **Global KPI tiles**
+  * Average PM2.5
+  * Average PM10
+  * Active sensor count
+* **PM10 vs PM2.5 comparison by country**
+*  **PM2.5 distribution (bar chart)**
+*  **PM10 distribution (bar chart)**
+* **Global country filter**
+
+### Dashboard Design Principles
+* Aggregation logic lives in Gold, not dashboards
+* Filters applied on low-cardinality dimensions (e.g. country)
+* Visuals remain simple and interpretable
+
+---
+
+## Python Utilities & Code Organization
+
+Reusable logic has been extracted into `src/utils` to improve:
+* Code readability
+* Testability
+* Reusability across notebooks
+
+### Utilities Include
+* HTTP request handling
+* Bronze row preparation
+* Shared helper functions
+
+### Databricks Runtime Note
+To ensure utilities are available during pipeline execution, notebooks include:
+
+```python
+import sys, os
+sys.path.append(os.path.abspath(".."))
+```

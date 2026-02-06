@@ -4,15 +4,25 @@
 
 This project implements a **production-style data engineering pipeline** that ingests live air-quality sensor data, validates and cleans it through layered transformations, and exposes analytics-ready datasets for **Python analysis and dashboard visualization**.
 
+At its core, the pipeline leverages **Delta Lake’s ACID transaction guarantees** to ensure:
+
+* **Atomic** writes (no partial or corrupted ingestions)
+* **Consistent** table states across transformations
+* **Isolated** concurrent reads and writes
+* **Durable** storage of historical sensor data
+
 The pipeline follows a **Bronze → Silver → Gold** architecture using **Databricks, Delta Lake, and PySpark**, with a strong focus on:
+
+* Transactional reliability on a data lake (ACID)
 * Data quality and physical plausibility
 * Deterministic deduplication
 * Analytics-friendly modeling
 * Dashboard-ready aggregation
 
 The final outputs power both:
-* Python-based exploratory analysis
-* Databricks SQL dashboards for air-quality monitoring
+
+* Python-based exploratory and sanity-check analysis
+* Databricks SQL dashboards for real-time air-quality monitoring
 
 ---
 

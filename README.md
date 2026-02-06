@@ -417,9 +417,6 @@ All trademarks and registered trademarks are the property of their respective ow
 
 Planned enhancements for this project include:
 
-* **Dashboard Screenshots:**  
-  Add visual examples of Databricks SQL dashboards to the documentation for easier onboarding and demonstration.
-
 * **Advanced Dashboard Analytics:**  
   Implement more complex analytics in dashboards, such as time-series anomaly detection, sensor reliability scoring, and geospatial heatmaps.
 

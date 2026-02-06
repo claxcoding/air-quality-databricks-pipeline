@@ -52,7 +52,7 @@ air-quality-databricks-pipeline
 │   ├── data-model.md                       # Logical and physical data model documentation
 │   └── dashboards
 │       └── databricks_sql
-│           └── air_quality_dashboard.png   # Dashboard KPIs, distributions, and comparisons
+│           └── air_quality_dashboard.png   # Dashboard KPIs, distributions and comparisons
 │
 ├── notebooks
 │   ├── 00_run_pipeline                     # Pipeline orchestration notebook

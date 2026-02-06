@@ -28,7 +28,9 @@ The final outputs power both:
 
 ## Architecture Overview
 
-![Air Quality Pipeline Architecture](docs/architecture.png)
+<div align="center">
+  <img src="docs/architecture.png" alt="Air Quality Pipeline Architecture" />
+</div>
 
 ---
 
@@ -45,7 +47,7 @@ Key visualization features include:
 ### Example Dashboard Screenshot
 
 ![Air Quality Dashboard](docs/dashboards/databricks_sql/air_quality_dashboard.png)
-*Screenshot of KPIs, distributions, and comparisons in Databricks SQL.*
+*Screenshot of KPIs, distributions, and comparisons in Databricks SQL. Global filter set on DE (Germany).*
 
 ### Why the Dashboard Is Not Stored as Code
 

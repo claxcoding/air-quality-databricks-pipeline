@@ -48,25 +48,25 @@ The final outputs power both:
 ```text
 air-quality-databricks-pipeline
 ├── docs
-│   ├── architecture.png            # Visualization of the project
-│   ├── data-model.md               # Documentation of logical and physical data model
+│   ├── architecture.png                    # Visualization of the project architecture
+│   ├── data-model.md                       # Logical and physical data model documentation
+│   └── dashboards
+│       └── databricks_sql
+│           └── air_quality_dashboard.png   # Dashboard KPIs, distributions, and comparisons
 │
 ├── notebooks
-│   ├── 00_run_pipeline             # Pipeline orchestration notebook
-│   ├── 01_platform_bootstrap       # Database and environment setup
-│   ├── 02_bronze_ingest_live       # Bronze ingestion (raw JSON)
-│   ├── 03_silver_cleaning          # Silver cleaning & validation
-│   ├── 04_gold_analytics           # Gold aggregations & snapshots
-│   └── 05_gold_quality_checks      # Gold-layer quality & sanity checks
+│   ├── 00_run_pipeline                     # Pipeline orchestration notebook
+│   ├── 01_platform_bootstrap               # Database and environment setup
+│   ├── 02_bronze_ingest_live               # Bronze ingestion (raw JSON)
+│   ├── 03_silver_cleaning                  # Silver cleaning & validation
+│   ├── 04_gold_analytics                   # Gold aggregations & snapshots
+│   └── 05_gold_quality_checks              # Gold-layer quality & sanity checks
 │
 ├── src
 │   └── utils
-│       ├── __init__.py             # Utility package initializer
-│       ├── bronze.py               # Bronze preparation helpers
-│       └── http.py                 # API fetching logic
-│
-├── dashboards
-│   └── databricks_sql              # Dashboard screenshots / exports
+│       ├── __init__.py                     # Utility package initializer
+│       ├── bronze.py                       # Bronze preparation helpers
+│       └── http.py                         # API fetching logic
 │
 └── README.md
 ```

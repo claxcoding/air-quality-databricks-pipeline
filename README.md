@@ -130,6 +130,27 @@ The project includes a dedicated **pipeline runner notebook** that orchestrates 
 
 ---
 
+## Platform Bootstrap
+
+**Notebook:** `01_platform_bootstrap`
+
+### Purpose
+The platform bootstrap notebook prepares the Databricks environment before any data ingestion or transformation occurs.
+
+### Responsibilities
+- Create required databases (Bronze, Silver, Gold) in an idempotent way
+- Validate basic platform assumptions (Spark session, Delta support)
+- Serve as a safe, repeatable initialization step for new environments or clusters
+
+### Design Notes
+- Contains **no business logic**
+- Can be re-run safely without side effects
+- Ensures the pipeline fails early if the platform is misconfigured
+
+This notebook is typically executed **once per environment**, or automatically as part of the full pipeline orchestration via `00_run_pipeline`.
+
+---
+
 ## Bronze Layer – Raw Ingestion
 
 **Notebook:** `02_bronze_ingest_live`

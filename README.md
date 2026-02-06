@@ -38,9 +38,8 @@ The final outputs power both:
 ```text
 air-quality-databricks-pipeline
 ├── docs
-│   ├── architecture.png
-│   ├── data-model.md
-│   └── project-overview.md
+│   ├── architecture.png            # Visualization of the project
+│   ├── data-model.md               # Documentation of logical and physical data model used in the Bronze → Silver → Gold architecture
 │
 ├── notebooks
 │   ├── 00_run_pipeline             # Pipeline orchestration notebook

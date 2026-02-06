@@ -32,6 +32,70 @@ The final outputs power both:
 
 ---
 
+## Dashboard Visualization Strategy
+
+The pipeline outputs are consumed to create interactive **Databricks SQL dashboards** for monitoring air quality metrics.  
+Key visualization features include:
+
+* **Global and country-level KPIs** for PM10 and PM2.5
+* **Comparison charts** between PM10 and PM2.5 by location
+* **Distribution bar charts** for PM concentrations
+* Ability to apply **filters** for country, date, or sensor type
+
+### Example Dashboard Screenshot
+
+![Air Quality Dashboard](docs/dashboards/databricks_sql/air_quality_dashboard.png)
+*Screenshot of KPIs, distributions, and comparisons in Databricks SQL.*
+
+### Why the Dashboard Is Not Stored as Code
+
+* Databricks SQL dashboards are tightly coupled to:
+  * A Databricks workspace
+  * SQL Warehouses
+  * Catalog and schema names
+* Dashboards are primarily **visual artifacts**, not portable code assets
+* Exported dashboard definitions are often workspace-specific and not reusable across environments
+
+### What *Is* Included in This Repository
+
+* **Static screenshots** of the dashboard (for documentation and presentation)
+  * Stored under:
+    ```
+    docs/dashboards/databricks_sql/
+    ```
+* **Fully reproducible Gold-layer tables**
+  * `air_quality_gold.daily_air_quality`
+  * `air_quality_gold.latest_sensor_snapshot`
+* **Well-defined schemas and aggregations** that make dashboard recreation trivial
+
+### How Users Can Recreate the Dashboard
+
+Any user running this pipeline can:
+
+1. Execute the full pipeline using `00_run_pipeline`
+2. Open **Databricks SQL**
+3. Create a new dashboard
+4. Build visualizations directly on top of:
+   * `air_quality_gold.latest_sensor_snapshot`
+   * `air_quality_gold.daily_air_quality`
+
+All business logic, filtering rules, and aggregations are already embedded in the Gold layer, ensuring:
+
+* Consistent metrics
+* Clean and physically plausible data
+* Dashboard-ready performance
+
+### Design Philosophy
+
+> Dashboards are treated as **consumers** of curated data, not as part of the data pipeline itself.
+
+This separation ensures:
+* Clean architecture
+* Reusability across tools
+* Long-term maint*
+
+---
+
 ## Data Source
 
 * **sensor.community**

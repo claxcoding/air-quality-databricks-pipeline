@@ -1,5 +1,11 @@
 # 🌍 Real-Time Air Quality Data Pipeline (Databricks • Delta Lake • PySpark)
 
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+[![Python 3.x](https://img.shields.io/badge/python-3.x-blue.svg)](https://www.python.org/)
+[![Databricks Runtime 13.x+](https://img.shields.io/badge/Databricks-13.x%2B-green.svg)](https://docs.databricks.com/)
+[![Delta Lake](https://img.shields.io/badge/Delta%20Lake-ACID-brightgreen.svg)](https://delta.io/)
+[![Apache Spark](https://img.shields.io/badge/Apache%20Spark-3.x-orange.svg)](https://spark.apache.org/)
+
 ## Overview
 
 This project implements a **production-style data engineering pipeline** that ingests live air-quality sensor data, validates and cleans it through layered transformations, and exposes analytics-ready datasets for **Python analysis and dashboard visualization**.
@@ -94,7 +100,7 @@ All business logic, filtering rules, and aggregations are already embedded in th
 This separation ensures:
 * Clean architecture
 * Reusability across tools
-* Long-term maint*
+* Long-term maintenance
 
 ---
 

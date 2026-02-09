@@ -64,7 +64,7 @@ Key visualization features include:
 * Dashboards are primarily **visual artifacts**, not portable code assets
 * Exported dashboard definitions are often workspace-specific and not reusable across environments
 
-### What is Included in This Repository
+### What Is Included in This Repository
 
 * **Static screenshots** of the dashboard (for documentation and presentation)
   * Stored under:
